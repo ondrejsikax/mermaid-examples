@@ -26,3 +26,30 @@ flowchart RL
   POD_REDIS@{ shape: proc, label: "pod/redis-0" }
   DEPLOY_REDIS@{ shape: rectangle, label: "sts/redis" } --> POD_REDIS
 ```
+
+
+```mermaid
+flowchart RL
+  USER2@{ shape: circle, label: "Users" } --> INGRESS_FE
+  INGRESS_FE@{ shape: rectangle, label: "ing/frontend" } --> SERVICE_FE
+  SERVICE_FE@{ shape: rectangle, label: "svc/frontend" } --> PODS_FE
+  PODS_FE@{ shape: procs, label: "pod/frontend..." }
+  DEPLOY_FE@{ shape: rectangle, label: "deploy/frontend" } --> PODS_FE
+  PODS_FE --> SERVICE_BE
+
+  USER@{ shape: circle, label: "Users" } --> INGRESS_FE_GO
+  INGRESS_FE_GO@{ shape: rectangle, label: "ing/frontend-go" } --> SERVICE_FE_GO
+  SERVICE_FE_GO@{ shape: rectangle, label: "svc/frontend-go" } --> PODS_FE_GO
+  PODS_FE_GO@{ shape: procs, label: "pod/frontend-go..." }
+  DEPLOY_FE_GO@{ shape: rectangle, label: "deploy/frontend-g" } --> PODS_FE_GO
+  PODS_FE_GO --> SERVICE_BE
+
+  SERVICE_BE@{ shape: rectangle, label: "svc/backend" } --> PODS_BE
+  PODS_BE@{ shape: procs, label: "pod/backend..." }
+  DEPLOY_BE@{ shape: rectangle, label: "deploy/backend" } --> PODS_BE
+  PODS_BE --> SERVICE_REDIS
+
+  SERVICE_REDIS@{ shape: rectangle, label: "svc/redis" } --> POD_REDIS
+  POD_REDIS@{ shape: proc, label: "pod/redis-0" }
+  DEPLOY_REDIS@{ shape: rectangle, label: "sts/redis" } --> POD_REDIS
+```
